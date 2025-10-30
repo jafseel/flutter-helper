@@ -1,0 +1,14 @@
+final injector = GetIt.asNewInstance();
+or 
+final injector = GetIt.instance;
+
+
+ injector.registerLazySingleton<DietAiMealScanDataSource>(
+        () => DietAiMealScanDataSourceImpl(aiScanApi: injector()));
+    injector.registerLazySingleton<DietAiMealScanRepository>(
+        () => DietAiMealScanRepositoryImpl(dataSource: injector()));
+    injector.registerLazySingleton<DietAiMealScanUseCase>(
+        () => DietAiMealScanUseCase(repository: injector()));
+
+
+var myAppModel = injector.get<AppModel>();
